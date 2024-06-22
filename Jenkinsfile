@@ -1,9 +1,5 @@
 pipeline {
-agent {
-    docker {
-        image 'grapeupci/ubuntu-kubectl:1.0.0'
-    }
-}
+agent any
     options {
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '3'))
         disableConcurrentBuilds()
@@ -52,7 +48,7 @@ agent {
             }
         }
 
-        
+
 
         stage('Deploy') {
             steps {
