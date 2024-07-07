@@ -2,10 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Scan Golang Code') {
+            agent {
+                docker {
+                    image 'golang:1.22.5'
+                }
+            }
             steps {
                 sh '''
-                ls
+                cd do-it-yourself/src/catalog/
+                go test
                 '''
             }
         }
