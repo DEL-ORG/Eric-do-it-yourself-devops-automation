@@ -12,7 +12,7 @@ pipeline {
                 sh '''
                 cd do-it-yourself/src/catalog/
                 ls -la 
-                whoami
+                // whoami
                 go test
                 '''
             }
