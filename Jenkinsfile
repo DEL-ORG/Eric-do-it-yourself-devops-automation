@@ -11,6 +11,8 @@ pipeline {
             steps {
                 sh '''
                 cd do-it-yourself/src/catalog/
+                whoami
+                ls -la 
                 go test
                 '''
             }
