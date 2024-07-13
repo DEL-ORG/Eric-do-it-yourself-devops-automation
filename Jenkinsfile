@@ -18,10 +18,6 @@ pipeline {
             }
         }
 
-        stage('true') {
-            steps {
-                echo 'Testing..'
-            }
-        }
+
     }
 }
