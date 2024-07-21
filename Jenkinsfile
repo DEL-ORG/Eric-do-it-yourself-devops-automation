@@ -4,10 +4,18 @@ pipeline {
             }
 
     stages {
+        stage('fetching update') {
+            steps {
+                sh '''
+            rm -rf Eric-do-it-yourself-devops-automation || true
+            git clone git@github.com:DEL-ORG/Eric-do-it-yourself-devops-automation.git ~/deployment
+                '''
+            }
+        }
         stage('clean up env') {
             steps {
                 sh '''
-            cd ~/Eric-do-it-yourself-devops-automation 
+            cd ~/deployment 
             docker-compose down --remove-orphans
                 '''
             }
@@ -15,7 +23,7 @@ pipeline {
         stage('pull images') {
             steps {
                 sh '''
-            cd ~/Eric-do-it-yourself-devops-automation
+            cd ~/deployment
             docker-compose pull
                 '''
             }
@@ -24,7 +32,7 @@ pipeline {
         stage('deploy') {
             steps {
                 sh '''
-            cd ~/Eric-do-it-yourself-devops-automation
+            cd ~/deployment
 
             docker-compose up -d  --remove-orphans
                 '''
@@ -33,7 +41,7 @@ pipeline {
         stage('list container') {
             steps {
                 sh '''
-            cd ~/Eric-do-it-yourself-devops-automation
+            cd ~/deployment
             docker-compose ps 
                 '''
             }
