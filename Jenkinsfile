@@ -7,7 +7,7 @@ pipeline {
         stage('fetching update') {
             steps {
                 sh '''
-            rm -rf Eric-do-it-yourself-devops-automation || true
+            rm -rf ~/deployment || true
             git clone git@github.com:DEL-ORG/Eric-do-it-yourself-devops-automation.git ~/deployment
                 '''
             }
