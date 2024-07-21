@@ -7,7 +7,7 @@ pipeline {
         stage('clean up env') {
             steps {
                 sh '''
-            cd ~/automation/Eric-do-it-yourself-devops-automation 
+            cd ~/Eric-do-it-yourself-devops-automation 
             docker-compose down --remove-orphans
                 '''
             }
@@ -15,7 +15,7 @@ pipeline {
         stage('pull images') {
             steps {
                 sh '''
-            cd ~/automation/Eric-do-it-yourself-devops-automation
+            cd ~/Eric-do-it-yourself-devops-automation
             docker-compose pull
                 '''
             }
@@ -24,7 +24,7 @@ pipeline {
         stage('deploy') {
             steps {
                 sh '''
-            cd ~/automation/Eric-do-it-yourself-devops-automation
+            cd ~/Eric-do-it-yourself-devops-automation
 
             docker-compose up -d  --remove-orphans
                 '''
@@ -33,7 +33,7 @@ pipeline {
         stage('list container') {
             steps {
                 sh '''
-            cd ~/automation/Eric-do-it-yourself-devops-automation
+            cd ~/Eric-do-it-yourself-devops-automation
             docker-compose ps 
                 '''
             }
