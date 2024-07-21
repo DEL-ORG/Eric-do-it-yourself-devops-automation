@@ -2,25 +2,40 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('clean up env') {
             steps {
-                echo 'Building..'
+                sh '''
+            cd ~/automation/Eric-do-it-yourself-devops-automation 
+            docker-compose down --remove-orphans
+                '''
             }
         }
-        stage('Test') {
+        stage('pull images') {
             steps {
-                echo 'Testing..'
+                sh '''
+            cd ~/automation/Eric-do-it-yourself-devops-automation
+            docker-compose pull
+                '''
             }
         }
         
-
-        
-        stage('Deploy') {
+        stage('deploy') {
             steps {
-                echo 'Deploying....'
+                sh '''
+            cd ~/automation/Eric-do-it-yourself-devops-automation
+
+            docker-compose up -d  --remove-orphans
+                '''
             }
         }
-
+        stage('list container') {
+            steps {
+                sh '''
+            cd ~/automation/Eric-do-it-yourself-devops-automation
+            docker-compose ps 
+                '''
+            }
+        }
 
     }
 }
