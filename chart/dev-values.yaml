@@ -19,4 +19,4 @@ checkout_db:
 assets:
   tag: "001" 
 ui:
-  tag: "001"
+  tag: "v2.0.5"
