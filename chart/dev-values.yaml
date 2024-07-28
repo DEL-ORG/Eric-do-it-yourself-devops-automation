@@ -3,7 +3,7 @@ catalog:
 orders_db:
   tag: 8.0
 catalog_db:
-  tag: 8.1
+  tag: 8.1.1
 cart:
   tag: 0.8.1  
 cart_dynamodb:
