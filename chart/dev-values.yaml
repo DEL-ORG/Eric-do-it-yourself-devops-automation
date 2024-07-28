@@ -1,22 +1,22 @@
 catalog:
-  tag: 001
+  tag: "001"
 orders_db:
-  tag: 001
+  tag: "001"
 catalog_db:
-  tag: 001
+  tag: "001"
 cart:
-  tag: 001  
+  tag: "001"  
 cart_dynamodb:
-  tag: 001
+  tag: "001"
 orders:
-  tag: 001
+  tag: "001"
 orders_db_rabbitmq:
-  tag: 001
+  tag: "001"
 checkout:
-  tag: 001
+  tag: "001"
 checkout_db:
-  tag: 001
+  tag: "001"
 assets:
-  tag: 001 
+  tag: "001" 
 ui:
-  tag: 001
+  tag: "001"
