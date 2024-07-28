@@ -704,7 +704,7 @@ spec:
     spec:
       containers:
         - name: rabbitmq
-          image: "devopseasylearning/eric_do_it_yourself_db_rabbitmq:{{ .Values.orders_db_rabbitmq.tag }}"
+          image: "devopseasylearning/eric_do_it_yourself_orders_db_rabbitmq:{{ .Values.orders_db_rabbitmq.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
           - name: amqp
