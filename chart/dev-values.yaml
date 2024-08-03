@@ -13,9 +13,9 @@ orders:
 orders_db_rabbitmq:
   tag: "6996a8"
 checkout:
-  tag: "001"
+  tag: "b45290"
 checkout_db:
-  tag: "001"
+  tag: "b45290"
 assets:
   tag: "001"
 ui:
