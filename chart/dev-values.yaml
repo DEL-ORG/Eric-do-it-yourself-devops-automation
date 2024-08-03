@@ -1,9 +1,9 @@
 catalog:
-  tag: "001"
+  tag: "ffe1df"
 orders_db:
   tag: "6996a8"
 catalog_db:
-  tag: "001"
+  tag: "ffe1df"
 cart:
   tag: "001"
 cart_dynamodb:
