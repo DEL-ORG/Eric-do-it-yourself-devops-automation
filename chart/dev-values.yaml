@@ -5,7 +5,7 @@ orders_db:
 catalog_db:
   tag: "001"
 cart:
-  tag: "001"  
+  tag: "001"
 cart_dynamodb:
   tag: "001"
 orders:
@@ -17,6 +17,8 @@ checkout:
 checkout_db:
   tag: "001"
 assets:
-  tag: "001" 
+  tag: "001"
 ui:
-  tag: "v2.0.5"
+  tag: "arsene"
+
+
