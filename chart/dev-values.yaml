@@ -1,7 +1,7 @@
 catalog:
   tag: "001"
 orders_db:
-  tag: "9b878b"
+  tag: "6996a8"
 catalog_db:
   tag: "001"
 cart:
@@ -9,9 +9,9 @@ cart:
 cart_dynamodb:
   tag: "001"
 orders:
-  tag: "9b878b"
+  tag: "6996a8"
 orders_db_rabbitmq:
-  tag: "9b878b"
+  tag: "6996a8"
 checkout:
   tag: "001"
 checkout_db:
