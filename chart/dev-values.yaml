@@ -19,4 +19,4 @@ checkout_db:
 assets:
   tag: "001"
 ui:
-  tag: "f2103c"
+  tag: "ecea31"
