@@ -17,6 +17,6 @@ checkout:
 checkout_db:
   tag: "b45290"
 assets:
-  tag: "001"
+  tag: "4c2902"
 ui:
   tag: "b390b1"
