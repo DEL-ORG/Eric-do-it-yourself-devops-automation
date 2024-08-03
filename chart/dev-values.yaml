@@ -19,6 +19,4 @@ checkout_db:
 assets:
   tag: "001"
 ui:
-  tag: "arsene"
-
-
+  tag: "f2103c"
