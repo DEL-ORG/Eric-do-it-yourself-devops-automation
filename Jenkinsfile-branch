@@ -83,7 +83,7 @@ pipeline {
                 sh '''
                 rm -rf Eric-do-it-yourself-UI || true
                 git clone -b ${BRANCH_UI} git@github.com:DEL-ORG/Eric-do-it-yourself-UI.git
-                cd ${WORKSPACE}/Eric-do-it-yourself-UI
+                cd ${WORKSPACE}/Eric-do-it-yourself-UI/ui
                 docker build -t devopseasylearning/eric_do_it_yourself_ui:${BUILD_NUMBER} .
                 docker push  devopseasylearning/eric_do_it_yourself_ui:${BUILD_NUMBER}
                 '''
@@ -98,7 +98,7 @@ pipeline {
                 sh '''
                 rm -rf Eric-do-it-yourself-Orders || true
                 git clone -b ${BRANCH_ORDERS} git@github.com:DEL-ORG/Eric-do-it-yourself-Orders.git
-                cd ${WORKSPACE}/Eric-do-it-yourself-Orders
+                cd ${WORKSPACE}/Eric-do-it-yourself-Orders/orders
                 docker build -t devopseasylearning/eric_do_it_yourself_orders:${BUILD_NUMBER} .
                 docker build -t devopseasylearning/eric_do_it_yourself_orders_db:${BUILD_NUMBER} . -f Dockerfile-db
                 docker build -t devopseasylearning/eric_do_it_yourself_orders_db_rabbitmq:${BUILD_NUMBER} . -f Dockerfile-rabbit-mq
@@ -116,7 +116,7 @@ pipeline {
                 sh '''
                 rm -rf Eric-do-it-yourself-Checkout || true
                 git clone -b ${BRANCH_CHECKOUT} git@github.com:DEL-ORG/Eric-do-it-yourself-Checkout.git
-                cd ${WORKSPACE}/Eric-do-it-yourself-Checkout
+                cd ${WORKSPACE}/Eric-do-it-yourself-Checkout/checkout
                 docker build  -t devopseasylearning/eric_do_it_yourself_checkout:${BUILD_NUMBER} .
                 docker build  -t devopseasylearning/eric_do_it_yourself_checkout_db:${BUILD_NUMBER} . -f Dockerfile-db
                 docker push  devopseasylearning/eric_do_it_yourself_checkout:${BUILD_NUMBER}
@@ -132,7 +132,7 @@ pipeline {
                 sh '''
                 rm -rf Eric-do-it-yourself-Catalog || true
                 git clone -b ${BRANCH_CATALOG} git@github.com:DEL-ORG/Eric-do-it-yourself-Catalog.git
-                cd ${WORKSPACE}/Eric-do-it-yourself-Checkout
+                cd ${WORKSPACE}/Eric-do-it-yourself-Catalog/catalog
                 docker build  -t devopseasylearning/eric_do_it_yourself_catalog:${BUILD_NUMBER} .
                 docker build  -t devopseasylearning/eric_do_it_yourself_catalog_db:${BUILD_NUMBER} . -f Dockerfile-db
                 docker push  devopseasylearning/eric_do_it_yourself_catalog:${BUILD_NUMBER}
@@ -149,7 +149,7 @@ pipeline {
                 sh '''
                 rm -rf Eric-do-it-yourself-Cart || true
                 git clone -b ${BRANCH_CART} git@github.com:DEL-ORG/Eric-do-it-yourself-Cart.git
-                cd ${WORKSPACE}/Eric-do-it-yourself-Cart
+                cd ${WORKSPACE}/Eric-do-it-yourself-Cart/cart
                 docker  build -t devopseasylearning/eric_do_it_yourself_cart:${BUILD_NUMBER} .
                 docker  build -t devopseasylearning/eric_do_it_yourself_cart_dynamodb:${BUILD_NUMBER} . -f Dockerfile-dynamodb 
                 docker push  devopseasylearning/eric_do_it_yourself_cart:${BUILD_NUMBER}
@@ -165,7 +165,7 @@ pipeline {
                 sh '''
                 rm -rf Eric-do-it-yourself-Assets || true
                 git clone -b ${BRANCH_ASSETS} git@github.com:DEL-ORG/Eric-do-it-yourself-Assets.git
-                cd ${WORKSPACE}/Eric-do-it-yourself-Assets
+                cd ${WORKSPACE}/Eric-do-it-yourself-Assets/assets
                 docker build -t devopseasylearning/eric_do_it_yourself_assets:${BUILD_NUMBER} .
                 docker push devopseasylearning/eric_do_it_yourself_assets:${BUILD_NUMBER}
 
