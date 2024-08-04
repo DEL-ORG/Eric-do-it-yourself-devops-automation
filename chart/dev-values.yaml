@@ -1,7 +1,7 @@
 catalog:
   tag: "ffe1df"
 orders_db:
-  tag: "04bad9"
+  tag: "73e2b2"
 catalog_db:
   tag: "ffe1df"
 cart:
@@ -9,9 +9,9 @@ cart:
 cart_dynamodb:
   tag: "69e73f"
 orders:
-  tag: "04bad9"
+  tag: "73e2b2"
 orders_db_rabbitmq:
-  tag: "04bad9"
+  tag: "73e2b2"
 checkout:
   tag: "b45290"
 checkout_db:
