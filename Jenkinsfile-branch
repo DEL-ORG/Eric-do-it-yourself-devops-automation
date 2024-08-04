@@ -71,12 +71,19 @@ pipeline {
             }
         }
 
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
 
         stage('UI+build+push') {
 
             steps {
                 sh '''
+                rm -rf Eric-do-it-yourself-UI || true
                 git clone -b ${BRANCH_UI} git@github.com:DEL-ORG/Eric-do-it-yourself-UI.git
+                cd ${WORKSPACE}/Eric-do-it-yourself-UI
                 docker build -t devopseasylearning/eric_do_it_yourself_ui:${BUILD_NUMBER} .
                 docker push  devopseasylearning/eric_do_it_yourself_ui:${BUILD_NUMBER}
                 '''
@@ -84,54 +91,107 @@ pipeline {
         }
 
 
-        stage('Login') {
-            steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
 
-        stage('build-image') {
+        stage('ORDERS+build+push') {
+
             steps {
                 sh '''
-                cd ${WORKSPACE}/ui
-                TAG=$(git rev-parse --short=6 HEAD)
-                docker build -t devopseasylearning/eric_do_it_yourself_ui:${TAG} .
+                rm -rf Eric-do-it-yourself-Orders || true
+                git clone -b ${BRANCH_ORDERS} git@github.com:DEL-ORG/Eric-do-it-yourself-Orders.git
+                cd ${WORKSPACE}/Eric-do-it-yourself-Orders
+                docker build -t devopseasylearning/eric_do_it_yourself_orders:${BUILD_NUMBER} .
+                docker build -t devopseasylearning/eric_do_it_yourself_orders_db:${BUILD_NUMBER} . -f Dockerfile-db
+                docker build -t devopseasylearning/eric_do_it_yourself_orders_db_rabbitmq:${BUILD_NUMBER} . -f Dockerfile-rabbit-mq
+                docker push  devopseasylearning/eric_do_it_yourself_orders:${BUILD_NUMBER}
+                docker push devopseasylearning/eric_do_it_yourself_orders_db:${BUILD_NUMBER}
+                docker push devopseasylearning/eric_do_it_yourself_orders_db_rabbitmq:${BUILD_NUMBER}
                 '''
             }
         }
 
-        stage('Push-image') {
-           when{ 
-         expression {
-           env.GIT_BRANCH == 'origin/main' }
-           }
-           steps {
-               sh '''
-               TAG=$(git rev-parse --short=6 HEAD)
-           docker push devopseasylearning/eric_do_it_yourself_ui:${TAG}  
-           
-               '''
-           }
+
+        stage('CHECKOUT+build+push') {
+
+            steps {
+                sh '''
+                rm -rf Eric-do-it-yourself-Checkout || true
+                git clone -b ${BRANCH_CHECKOUT} git@github.com:DEL-ORG/Eric-do-it-yourself-Checkout.git
+                cd ${WORKSPACE}/Eric-do-it-yourself-Checkout
+                docker build  -t devopseasylearning/eric_do_it_yourself_checkout:${BUILD_NUMBER} .
+                docker build  -t devopseasylearning/eric_do_it_yourself_checkout_db:${BUILD_NUMBER} . -f Dockerfile-db
+                docker push  devopseasylearning/eric_do_it_yourself_checkout:${BUILD_NUMBER}
+                docker push devopseasylearning/eric_do_it_yourself_checkout_db:${BUILD_NUMBER}
+                '''
+            }
         }
 
+
+        stage('CATALOG+build+push') {
+
+            steps {
+                sh '''
+                rm -rf Eric-do-it-yourself-Catalog || true
+                git clone -b ${BRANCH_CATALOG} git@github.com:DEL-ORG/Eric-do-it-yourself-Catalog.git
+                cd ${WORKSPACE}/Eric-do-it-yourself-Checkout
+                docker build  -t devopseasylearning/eric_do_it_yourself_catalog:${BUILD_NUMBER} .
+                docker build  -t devopseasylearning/eric_do_it_yourself_catalog_db:${BUILD_NUMBER} . -f Dockerfile-db
+                docker push  devopseasylearning/eric_do_it_yourself_catalog:${BUILD_NUMBER}
+                docker push devopseasylearning/eric_do_it_yourself_catalog_db:${BUILD_NUMBER}
+
+                '''
+            }
+        }
+
+
+        stage('CART+build+push') {
+
+            steps {
+                sh '''
+                rm -rf Eric-do-it-yourself-Cart || true
+                git clone -b ${BRANCH_CART} git@github.com:DEL-ORG/Eric-do-it-yourself-Cart.git
+                cd ${WORKSPACE}/Eric-do-it-yourself-Cart
+                docker  build -t devopseasylearning/eric_do_it_yourself_cart:${BUILD_NUMBER} .
+                docker  build -t devopseasylearning/eric_do_it_yourself_cart_dynamodb:${BUILD_NUMBER} . -f Dockerfile-dynamodb 
+                docker push  devopseasylearning/eric_do_it_yourself_cart:${BUILD_NUMBER}
+                docker push devopseasylearning/eric_do_it_yourself_cart_dynamodb:${BUILD_NUMBER}
+
+                '''
+            }
+        }      
+
+        stage('ASSETS+build+push') {
+
+            steps {
+                sh '''
+                rm -rf Eric-do-it-yourself-Assets || true
+                git clone -b ${BRANCH_ASSETS} git@github.com:DEL-ORG/Eric-do-it-yourself-Assets.git
+                cd ${WORKSPACE}/Eric-do-it-yourself-Assets
+                docker build -t devopseasylearning/eric_do_it_yourself_assets:${BUILD_NUMBER} .
+                docker push devopseasylearning/eric_do_it_yourself_assets:${BUILD_NUMBER}
+
+                '''
+            }
+        }
 
 stage('trigger-deployment') {
-    agent { 
-        label 'deploy' 
-    }
-    when { 
-        expression { 
-            env.GIT_BRANCH == 'origin/main' 
-        }
-    }
     steps {
         sh '''
-            TAG=$(git rev-parse --short=6 HEAD)
+            TAG=${BUILD_NUMBER}
             rm -rf Eric-do-it-yourself-devops-automation || true
             git clone git@github.com:DEL-ORG/Eric-do-it-yourself-devops-automation.git 
             cd Eric-do-it-yourself-devops-automation/chart
-            yq eval '.ui.tag = "'"$TAG"'"' -i dev-values.yaml
-            
+            yq eval '.ui.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.assets.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.checkout_db.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.checkout.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.orders_db_rabbitmq.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.orders.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.cart_dynamodb.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.cart.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.catalog_db.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.orders_db.tag = "'"$TAG"'"' -i branch-values.yaml
+            yq eval '.catalog.tag = "'"$TAG"'"' -i branch-values.yaml
+
             git config --global user.name "devopseasylearning"
             git config --global user.email info@devopseasylearning.com
             
@@ -139,7 +199,7 @@ stage('trigger-deployment') {
             if git diff-index --quiet HEAD; then
                 echo "No changes to commit"
             else
-                git commit -m "updating ui to ${TAG}"
+                git commit -m "updating APPS  to ${BUILD_NUMBER}"
                 git push origin main
             fi
         '''
