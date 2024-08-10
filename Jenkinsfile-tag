@@ -98,33 +98,56 @@ do
   DIR=$(basename "$(pwd)")
 
   if [ "$DIR" = "UI" ]; then 
+    if git rev-parse "$TAG_UI" >/dev/null 2>&1; then
+      git tag -d $TAG_UI
+      git push origin :refs/tags/$TAG_UI
+    fi
     git tag -a $TAG_UI -m "Release version $TAG_UI"
     git push origin $TAG_UI
 
   elif [ "$DIR" = "ORDERS" ]; then 
+    if git rev-parse "$TAG_ORDERS" >/dev/null 2>&1; then
+      git tag -d $TAG_ORDERS
+      git push origin :refs/tags/$TAG_ORDERS
+    fi
     git tag -a $TAG_ORDERS -m "Release version $TAG_ORDERS"
     git push origin $TAG_ORDERS
 
   elif [ "$DIR" = "CHECKOUT" ]; then 
+    if git rev-parse "$TAG_CHECKOUT" >/dev/null 2>&1; then
+      git tag -d $TAG_CHECKOUT
+      git push origin :refs/tags/$TAG_CHECKOUT
+    fi
     git tag -a $TAG_CHECKOUT -m "Release version $TAG_CHECKOUT"
     git push origin $TAG_CHECKOUT
 
   elif [ "$DIR" = "CATALOG" ]; then 
+    if git rev-parse "$TAG_CATALOG" >/dev/null 2>&1; then
+      git tag -d $TAG_CATALOG
+      git push origin :refs/tags/$TAG_CATALOG
+    fi
     git tag -a $TAG_CATALOG -m "Release version $TAG_CATALOG"
     git push origin $TAG_CATALOG
 
   elif [ "$DIR" = "CART" ]; then 
+    if git rev-parse "$TAG_CART" >/dev/null 2>&1; then
+      git tag -d $TAG_CART
+      git push origin :refs/tags/$TAG_CART
+    fi
     git tag -a $TAG_CART -m "Release version $TAG_CART"
     git push origin $TAG_CART
 
   elif [ "$DIR" = "ASSETS" ]; then 
+    if git rev-parse "$TAG_ASSETS" >/dev/null 2>&1; then
+      git tag -d $TAG_ASSETS
+      git push origin :refs/tags/$TAG_ASSETS
+    fi
     git tag -a $TAG_ASSETS -m "Release version $TAG_ASSETS"
     git push origin $TAG_ASSETS
   fi
 
   cd ..
 done
-
 
                 '''
             }
