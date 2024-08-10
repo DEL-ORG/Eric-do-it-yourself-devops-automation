@@ -19,4 +19,4 @@ checkout_db:
 assets:
   tag: "4c2902"
 ui:
-  tag: "9bc65e"
+  tag: "9eb2be"
