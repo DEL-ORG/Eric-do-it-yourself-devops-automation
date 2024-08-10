@@ -92,42 +92,40 @@ pipeline {
                 git clone -b production   git@github.com:DEL-ORG/Eric-do-it-yourself-Catalog.git    CATALOG
                 git clone -b production  git@github.com:DEL-ORG/Eric-do-it-yourself-Cart.git       CART
                 git clone -b production   git@github.com:DEL-ORG/Eric-do-it-yourself-Assets.git     ASSETS
-for i in  UI ORDERS CHECKOUT CATALOG CART ASSETS 
+for i in UI ORDERS CHECKOUT CATALOG CART ASSETS 
 do 
-cd $i 
-DIR=$(basename "$(pwd)")
+  cd $i 
+  DIR=$(basename "$(pwd)")
 
-if [ $DIR == UI ]
-then 
-  git tag -a $TAG_UI -m "Release version $TAG_UI"
-  git push origin $TAG_UI
+  if [ "$DIR" = "UI" ]; then 
+    git tag -a $TAG_UI -m "Release version $TAG_UI"
+    git push origin $TAG_UI
 
-elif [ $DIR == ORDERS ]
-then 
-  git tag -a $TAG_ORDERS -m "Release version $TAG_ORDERS"
-  git push origin $TAG_ORDERS
+  elif [ "$DIR" = "ORDERS" ]; then 
+    git tag -a $TAG_ORDERS -m "Release version $TAG_ORDERS"
+    git push origin $TAG_ORDERS
 
-elif [ $DIR == CHECKOUT ]
-then 
-  git tag -a $TAG_CHECKOUT -m "Release version $TAG_CHECKOUT"
-  git push origin $TAG_CHECKOUT
+  elif [ "$DIR" = "CHECKOUT" ]; then 
+    git tag -a $TAG_CHECKOUT -m "Release version $TAG_CHECKOUT"
+    git push origin $TAG_CHECKOUT
 
-elif [ $DIR == CATALOG ]
-then 
-  git tag -a $TAG_CATALOG -m "Release version $TAG_CATALOG"
-  git push origin $TAG_CATALOG
+  elif [ "$DIR" = "CATALOG" ]; then 
+    git tag -a $TAG_CATALOG -m "Release version $TAG_CATALOG"
+    git push origin $TAG_CATALOG
 
-elif [ $DIR == CART ]
-then 
-  git tag -a $TAG_CART -m "Release version $TAG_CART"
-  git push origin $TAG_CART
+  elif [ "$DIR" = "CART" ]; then 
+    git tag -a $TAG_CART -m "Release version $TAG_CART"
+    git push origin $TAG_CART
 
-elif [ $DIR == ASSETS ]
-then 
-  git tag -a $TAG_ASSETS -m "Release version $TAG_ASSETS"
-  git push origin $TAG_ASSETS
-fi
+  elif [ "$DIR" = "ASSETS" ]; then 
+    git tag -a $TAG_ASSETS -m "Release version $TAG_ASSETS"
+    git push origin $TAG_ASSETS
+  fi
+
+  cd ..
 done
+
+
                 '''
             }
 }
