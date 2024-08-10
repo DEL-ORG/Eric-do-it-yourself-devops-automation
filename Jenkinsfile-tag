@@ -74,7 +74,7 @@ pipeline {
             steps {
                 sh '''
                 cd ${WORKSPACE} 
-                bash validate.sh
+                bash validate.sh $TAG_UI $TAG_ORDERS $TAG_CHECKOUT $TAG_CATALOG $TAG_CART $TAG_ASSETS
                 '''
             }
         }
