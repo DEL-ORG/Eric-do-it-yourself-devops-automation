@@ -1,6 +1,6 @@
 pipeline {
     agent {
-                label ("SERVER02")
+                label ("deploy")
             }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('del-docker-hub-auth')
