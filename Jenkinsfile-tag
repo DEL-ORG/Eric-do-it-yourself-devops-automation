@@ -234,7 +234,7 @@ done
 
     post {
         success {
-            slackSend(channel: '#development-alerts', color: 'good', message: "SUCCESSFUL: Application Eric-do-it-yourself-UI REDAY for PROD\n TAG information\n $TAG_UI\n $TAG_ORDERS\n $TAG_CHECKOUT\n $TAG_CATALOG\n $TAG_CART\n $TAG_ASSETS")
+            slackSend(channel: '#development-alerts', color: 'good', message: "SUCCESSFUL: Application Eric-do-it-yourself-UI REDAY for PROD\n TAG information\n UI: $TAG_UI\n ORDERS: $TAG_ORDERS\n CHECKOUT: $TAG_CHECKOUT\n CATALOG: $TAG_CATALOG\n CART: $TAG_CART\n ASSETS: $TAG_ASSETS")
         }
 
         unstable {
