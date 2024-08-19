@@ -5,9 +5,9 @@ orders_db:
 catalog_db:
   tag: "c27fbb"
 cart:
-  tag: "69e73f"
+  tag: "e38d71"
 cart_dynamodb:
-  tag: "69e73f"
+  tag: "e38d71"
 orders:
   tag: "73e2b2"
 orders_db_rabbitmq:
