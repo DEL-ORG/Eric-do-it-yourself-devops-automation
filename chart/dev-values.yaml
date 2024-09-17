@@ -1,9 +1,9 @@
 catalog:
-  tag: "a41db7"
+  tag: "a1e07e"
 orders_db:
   tag: "73e2b2"
 catalog_db:
-  tag: "a41db7"
+  tag: "a1e07e"
 cart:
   tag: "b6c148"
 cart_dynamodb:
